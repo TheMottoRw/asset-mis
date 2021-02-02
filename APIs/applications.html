@@ -1,0 +1,1300 @@
+{
+	"info": {
+		"_postman_id": "4c1fe749-e57a-46b7-84d3-95c4446f7b4f",
+		"name": "ASSET MIS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://192.168.43.121/AssetMIS/ClassesRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "insertClass",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Year II IS",
+							"type": "text"
+						},
+						{
+							"key": "academic_year",
+							"value": "2019-2020",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/ClassesRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"ClassesRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/ClassesRequest.php?action=getAllClasses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/ClassesRequest.php?action=getAllClasses",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"ClassesRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAllClasses"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/ClassesRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "updateClass",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Updated...!!!!",
+							"type": "text"
+						},
+						{
+							"key": "academic_year",
+							"value": "2020-2021",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/ClassesRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"ClassesRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/ClassesRequest.php?action=getClassById&id=4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/ClassesRequest.php?action=getClassById&id=4",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"ClassesRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getClassById"
+						},
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/ClassesRequest.php?action=deleteClass&id=5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/ClassesRequest.php?action=deleteClass&id=5",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"ClassesRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteClass"
+						},
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/DepartmentRequest.php?action=getAllDepartments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/DepartmentRequest.php?action=getAllDepartments",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"DepartmentRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAllDepartments"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/DepartmentRequest.php?action=getDepartmentById&id=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/DepartmentRequest.php?action=getDepartmentById&id=2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"DepartmentRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getDepartmentById"
+						},
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/DepartmentRequest.php?action=deleteDepartment&id=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/DepartmentRequest.php?action=deleteDepartment&id=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"DepartmentRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteDepartment"
+						},
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/DepartmentRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "insertDepartment",
+							"type": "text"
+						},
+						{
+							"key": "acronym",
+							"value": "IT",
+							"type": "text"
+						},
+						{
+							"key": "names",
+							"value": "Information Technology",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": " SABE",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/DepartmentRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"DepartmentRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/DepartmentRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "updateDepartment",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "acronym",
+							"value": "CST ENG",
+							"type": "text"
+						},
+						{
+							"key": "names",
+							"value": "CONSTRUCTION ENGINEERING",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": " MUHABURA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/DepartmentRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"DepartmentRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/StudentRequest.php?action=getAllStudents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/StudentRequest.php?action=getAllStudents",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"StudentRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAllStudents"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/StudentRequest.php?action=getStudentById&id=4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/StudentRequest.php?action=getStudentById&id=4",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"StudentRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getStudentById"
+						},
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/StudentRequest.php?action=deleteStudent&id=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/StudentRequest.php?action=deleteStudent&id=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"StudentRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteStudent"
+						},
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/StudentRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "insertStudent",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "MUSANGWA ",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": " PASCAL",
+							"type": "text"
+						},
+						{
+							"key": "reg_number",
+							"value": "219007056",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pascal@ur.rw",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "dept_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "class_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/StudentRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"StudentRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/StudentRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "updateStudent",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": "NTURANYENABANGA",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "RABAN",
+							"type": "text"
+						},
+						{
+							"key": "reg_number",
+							"value": "219007056",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pascal@ur.rw",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "dept_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "class_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/StudentRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"StudentRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/EmployeeRequest.php?action=getAllEmployees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/EmployeeRequest.php?action=getAllEmployees",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"EmployeeRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAllEmployees"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/EmployeeRequest.php?action=getEmployeeById&id=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/EmployeeRequest.php?action=getEmployeeById&id=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"EmployeeRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getEmployeeById"
+						},
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/EmployeeRequest.php?action=deleteEmployee&id=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/EmployeeRequest.php?action=deleteEmployee&id=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"EmployeeRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteEmployee"
+						},
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/EmployeeRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "updateEmployee",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": " BYIRINGIRO",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "EMMANUEL",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "manunudi@muhire.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "0788332245",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "dept_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/EmployeeRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"EmployeeRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/EmployeeRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "insertEmployee",
+							"type": "text"
+						},
+						{
+							"key": "firstname",
+							"value": " MUHIRE ",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "KJOHON",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "muhire@muhire.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "0788332245",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "dept_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/EmployeeRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"EmployeeRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetsRequest.php?action=getAllAssets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetsRequest.php?action=getAllAssets",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetsRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAllAssets"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetsRequest.php?action=getAssetById&id=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetsRequest.php?action=getAssetById&id=2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetsRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAssetById"
+						},
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetsRequest.php?action=deleteAsset&id=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetsRequest.php?action=deleteAsset&id=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetsRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteAsset"
+						},
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetsRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "insertAsset",
+							"type": "text"
+						},
+						{
+							"key": "names",
+							"value": " VGA",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": " ssd",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": " double VGA used tosddsfsfs",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "5YIT-2000",
+							"type": "text"
+						},
+						{
+							"key": "serial_number",
+							"value": " 2YMATE",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": " COMPUTER ACCESSORY",
+							"type": "text"
+						},
+						{
+							"key": "dept_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetsRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetsRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetsRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "updateAsset",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "names",
+							"value": " PROJECTOR",
+							"type": "text"
+						},
+						{
+							"key": "state",
+							"value": " SA",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": " 3D",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "5YIT-2000",
+							"type": "text"
+						},
+						{
+							"key": "serial_number",
+							"value": " 2YMATE",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": " COMPUTER ACCESSORY",
+							"type": "text"
+						},
+						{
+							"key": "dept_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetsRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetsRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "updateAssetMovement",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "student_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "asset_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "booked_on",
+							"value": "2020-11-11 21:21:12",
+							"type": "text"
+						},
+						{
+							"key": "submitted_on",
+							"value": "2021-01-20 12:12:12",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": "LIBRARY-CAMP KIGALI",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": " Available",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "25",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetMovementRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "action",
+							"value": "insertAssetMovement",
+							"type": "text"
+						},
+						{
+							"key": "student_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "asset_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "booked_on",
+							"value": "2020-11-11",
+							"type": "text"
+						},
+						{
+							"key": "submitted_on",
+							"value": "2021-01-20",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": "KWA GATUZA",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": " Available",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "25",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetMovementRequest.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php?action=deleteAssetMovement&id=3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php?action=deleteAssetMovement&id=3",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetMovementRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deleteAssetMovement"
+						},
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php?action=getAssetMovementById&id=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php?action=getAssetMovementById&id=2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetMovementRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAssetMovementById"
+						},
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php?action=getAllAssetMovements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.43.121/AssetMIS/AssetMovementRequest.php?action=getAllAssetMovements",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"121"
+					],
+					"path": [
+						"AssetMIS",
+						"AssetMovementRequest.php"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "getAllAssetMovements"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
