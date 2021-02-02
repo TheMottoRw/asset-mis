@@ -5,7 +5,7 @@ $obj=new Employee();
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
 	case 'POST':
-		switch ($_POST['action']) {
+		switch ($_POST['category']) {
 			case 'insertEmployee':
 				echo json_encode($obj->insertEmployee($_POST));
 				echo "Insert Requested";
@@ -22,7 +22,7 @@ switch ($method) {
 		}
 		break;
 	case 'GET':
-		switch ($_GET['action']) {
+		switch ($_GET['category']) {
 			case 'getEmployeeById':
 				$id=$_GET['id'];
 				echo json_encode($obj->getEmployeeById($id));

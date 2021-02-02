@@ -1,7 +1,7 @@
 <?php 
 include_once "Database.php";
 
-class Student
+class Employee
 {
     private $conn;
 
@@ -19,6 +19,7 @@ class Student
     $lastname = $arr['lastname'];
     $phone = $arr['phone'];
     $email = $arr['email'];
+    
     $password = base64_encode($arr['password']);
     $dept_id = $arr['dept_id'];
     $role = $arr['role'];
@@ -72,7 +73,6 @@ class Student
     $lastname = $arr['lastname'];
     $phone = $arr['phone'];
     $email = $arr['email'];
-    $password = base64_encode($arr['password']);
     $dept_id = $arr['dept_id'];
     $role = $arr['role'];
     $id = $arr['id'];

@@ -25,7 +25,7 @@ class Department
 
 		$query->execute(array("acronym"=>$acronym,"names"=>$names,"location"=>$location));
 
-        if ($query->rowCount()==0) {
+        if ($query->rowCount()>0) {
     	$response ['message'] = "student added";
     	   $response['id'] = $this->conn->lastInsertId();
         } else {
@@ -52,7 +52,7 @@ class Department
 	}
 	function deleteDepartment($id){
 
-		$response = ['status' => 'ok', 'message' => "Successful deleted document type", 'id' => 0];
+		$response = ['status' => 'ok', 'message' => "Successful deleted document type", 'id' => $id];
 
 		$query=$this->conn->prepare("DELETE FROM department WHERE id=:id");
 		$query->execute(array("id"=>$id));

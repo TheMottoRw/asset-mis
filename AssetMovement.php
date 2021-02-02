@@ -51,7 +51,7 @@ class AssetMovement{
 		return $data;
 	}
 	function deleteAssetMovement($id){
-		$response = ['status' => 'ok', 'message' => "succesful fetched", 'id' => 0];
+		$response = ['status' => 'ok', 'message' => "succesful fetched", 'id' => $id];
 
 		$query=$this->conn->prepare("DELETE FROM asset_movement WHERE id=:id");
 		$query->execute(array("id"=>$id));
@@ -65,6 +65,15 @@ class AssetMovement{
 	function updateAssetMovement($arr){
 
 		$response = ['status' => 'ok', 'message' => "Successful inserted", 'id' => $arr['id']];
+
+	$student_id = $arr['student_id'];
+    $asset_id = $arr['asset_id'];
+    $booked_on = $arr['booked_on'];
+    $submitted_on = $arr['submitted_on'];
+    $location = $arr['location'];
+    $status = $arr['status'];
+    $quantity = $arr['quantity'];
+    $id = $arr['id'];
 
 		$query=$this->conn->prepare("UPDATE asset_movement set student_id =:student_id,asset_id=:asset_id,booked_on=:booked_on,submitted_on=:submitted_on,location=:location,status=:status,quantity=:quantity WHERE id=:id");
 

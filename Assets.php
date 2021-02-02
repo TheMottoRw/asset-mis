@@ -15,7 +15,7 @@ class Assets
 
 	$response = ['status' => 'ok', 'message' => "Successful inserted", 'id' => 0];
 	
-    $name = $arr['name'];
+    $names = $arr['names'];
     $state = $arr['state'];
     $description = $arr['description'];
     $code = $arr['code'];
@@ -55,7 +55,7 @@ class Assets
 	}
 	function deleteAsset($id){
 
-		$response = ['status' => 'ok', 'message' => "Asset successful deleted ", 'id' => 0];
+		$response = ['status' => 'ok', 'message' => "Asset successful deleted ", 'id' => $id];
 
 		$query=$this->conn->prepare("DELETE FROM assets WHERE id=:id");
 		$query->execute(array("id"=>$id));
@@ -68,7 +68,7 @@ class Assets
 
 	$response = ['status' => 'ok', 'message' => "Asset succesful updated", 'id' => $arr['id']];
 
-	$name = $arr['name'];
+	$names = $arr['names'];
     $state = $arr['state'];
     $description = $arr['description'];
     $code = $arr['code'];

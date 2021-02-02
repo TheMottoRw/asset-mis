@@ -7,7 +7,7 @@ switch ($method) {
 	case 'POST':
 		switch ($_POST['category']) {
 			case 'insertAssetMovement':
-				echo json_encode($obj->insertAssetMovement($_POST))		
+				echo json_encode($obj->insertAssetMovement($_POST));		
 				break;
 
 			case 'updateAssetMovement':
@@ -25,7 +25,7 @@ switch ($method) {
 		switch ($_GET['category']) {
 			case 'getAssetMovementById':
 				$id=$_GET['id'];
-				echo json_encode($obj->getAssetMovementById($id);
+				echo json_encode($obj->getAssetMovementById($id));
 				// echo "Get Users By Id Requested";
 				break;
 			case 'getAllAssetMovements':

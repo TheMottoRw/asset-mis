@@ -50,7 +50,7 @@ class Classes{
 		return $data;
 	}
 	function deleteClass($id){
-		 $response = ['status' => 'ok', 'message' => "succesful fetched", 'id' => 0];
+		 $response = ['status' => 'ok', 'message' => "deleted succesful", 'id' => $id];
 
 		$query=$this->conn->prepare("DELETE FROM classes WHERE id=:id");
 		$query->execute(array("id"=>$id));

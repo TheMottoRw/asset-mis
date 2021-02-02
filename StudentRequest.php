@@ -5,7 +5,7 @@ $obj=new Student();
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
 	case 'POST':
-		switch ($_POST['categeory']) {
+		switch ($_POST['category']) {
 			case 'insertStudent':
 				
 				echo json_encode($obj->insertStudent($_POST));
@@ -23,7 +23,7 @@ switch ($method) {
 		}
 		break;
 	case 'GET':
-		switch ($_GET['categeory']) {
+		switch ($_GET['category']) {
 			case 'getStudentById':
 				$id=$_GET['id'];
 				echo json_encode($obj->getStudentById($id));

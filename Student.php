@@ -55,7 +55,7 @@ class Student
 	}
 	function deleteStudent($id){
 
-		$response = ['status' => 'ok', 'message' => "Successful deleted Student", 'id' => 0];
+		$response = ['status' => 'ok', 'message' => "Successful deleted Student", 'id' => $id];
 
 		$query=$this->conn->prepare("DELETE FROM student WHERE id=:id");
 		$query->execute(array("id"=>$id));

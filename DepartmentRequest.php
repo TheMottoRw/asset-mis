@@ -13,7 +13,7 @@ switch ($method) {
 				break;
 			case 'updateDepartment':
 			
-				echo json_encode($obj->updateDepartment($id,$acronym,$names,$location));
+				echo json_encode($obj->updateDepartment($_POST));
 				echo "Update Requested";
 				break;
 			
