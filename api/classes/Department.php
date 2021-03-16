@@ -20,6 +20,13 @@ class Department
         $acronym = $arr['acronym'];
         $names = $arr['names'];
 
+        // validation
+        $validationStatus = $this->validate->isEmpty(["Department name"=>$names,"Department accronym"=>$acronym]);
+        if($validationStatus['status']){
+            return $feed = ['status'=>'fail','message'=>"<div class='alert alert-danger'>".$validationStatus['message']."</div>"];
+        }
+        // end validation
+
         $query = $this->conn->prepare("INSERT INTO department set acronym =:acronym,names=:names");
 
         $query->execute(array("acronym" => $acronym, "names" => $names));

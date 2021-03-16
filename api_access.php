@@ -39,16 +39,15 @@ function setSession($arr){
 }
 function validateSession($allowedSession){
     $currentFile = basename($_SERVER['PHP_SELF']);
-    $dualPrivileged = ['returned_reports.php','nonreturned_reports.php','standard_reports.php','police.php'];
-    if(!isset($_SESSION['sess_id']) || !isset($_SESSION['sess_category'])) header("location:signin.php");
+    $dualPrivileged = [];
+    if(!isset($_SESSION['login'])) header("location:login.php");
     else {
         //validate privileges
         if(!in_array($currentFile,$dualPrivileged)){
             //check allowed privilege
-            if(!in_array($_SESSION['sess_category'],$allowedSession)){
-                echo "<script>alert('".json_encode($_SESSION)."')</script>";
+            if(!in_array($_SESSION['role'],$allowedSession)){
                 session_destroy();
-                echo "<script>window.location='signin.php';</script>";
+                echo "<script>window.location='login.php';</script>";
 //                header("location:signin.php");
             }
         }

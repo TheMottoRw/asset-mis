@@ -27,16 +27,25 @@ include('api_access.php');
                             if ($resp->status == 'ok') {
                                 $userInfo = $resp->user_info;
                                 $_SESSION['login'] = true;
-                                $_SESSION['department'] = $resp->dept_id;
-                                $_SESSION['user_info'] = ['firstname'=>$resp->firstname,'lastname'=>$resp->lastname,'phone'=>$resp->phone];
+                                $_SESSION['user_info'] = ['firstname'=>$userInfo->firstname,'lastname'=>$userInfo->lastname,'email'=>$userInfo->email,'phone'=>$userInfo->phone];
                                 $_SESSION['role'] = $userInfo->role;
-                                $_SESSION['id'] = $userInfo->id;
+                                $_SESSION['user_id'] = $userInfo->id;
                                 if ($userInfo->role == 'Admin') {
                                     header('location:Departments.php');
-                                } elseif ($userInfo->role == 'Standard') {
+                                } elseif ($userInfo->role == 'StockManager') {
                                     header('location:Assets.php');
+                                } elseif ($userInfo->role == 'LabTechnician') {
+                                    $_SESSION['department'] = $userInfo->dept_id;
+                                    header('location:AssetMovements.php');
+                                } elseif ($userInfo->role == 'Teacher') {
+                                    $_SESSION['department'] = $userInfo->dept_id;
+                                    header('location:Reservation.php');
+                                } elseif ($userInfo->role == 'Student') {
+                                    $_SESSION['department'] = $userInfo->dept_id;
+                                    $_SESSION['class'] = $userInfo->class_id;
+                                    header('location:Reservation.php');
                                 } else {
-                                    echo "<div class='alert alert-danger'>You are not authorized!</div>";
+                                    echo "<div class='alert alert-danger'> ".$userInfo->role." You are not authorized! </div>";
                                 }
                             } else echo $resp->message;
                         }
@@ -44,7 +53,7 @@ include('api_access.php');
                         <form action="" method="post">
                             <div class="form-group">
                                 <label>Phone number or Email Address</label>
-                                <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                <input class="au-input au-input--full" type="text" name="email" placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
@@ -52,9 +61,6 @@ include('api_access.php');
                                        placeholder="Password">
                             </div>
                             <div class="login-checkbox">
-                                <label>
-                                    <a href="forget-pass.php">Forgotten Password?</a>
-                                </label>
                             </div>
                             <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" name="btnLogin">sign
                                 in

@@ -21,3 +21,9 @@
 
 <!-- Main JS-->
 <script src="js/main.js"></script>
+<script src="js/jslive.js"></script>
+<script>
+    function searchTable(id){
+        jslive.pagingTable({id:id,shows:100,active:0,val:''});
+    }
+</script>

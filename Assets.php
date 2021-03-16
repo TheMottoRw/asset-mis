@@ -1,8 +1,9 @@
 <?php
 session_start();
 include('api_access.php');
-$students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
-$assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=".$_SESSION['department']));
+$students = json_decode(curlGetRequest("StudentRequest.php?category=whotoborrow"));
+$assets = json_decode(curlGetRequest("AssetsRequest.php?category=get"));
+$departments = json_decode(curlGetRequest("DepartmentRequest.php?category=get"));
 
 ?>
 <html lang="en">
@@ -12,7 +13,7 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
     <div class="page-wrapper">
 
         <!-- MENU SIDEBAR-->
-        <?php include_once "includes/logged_menu_emp.php";?>
+        <?php include_once "includes/logged_menu_stockmgr.php";?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -39,11 +40,12 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                                       <span aria-hidden="true">&times;</span>
                                     </button>
                                   </div>
-                                  <form>
+                                  <form method="POST" id="form-asset" action="<?= $_SERVER['PHP_SELF']; ?>">
                                     <div class="modal-body">
 										<form class="px-4 py-3 color-black" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 										  <div class="form-group">
 										    <label for="names">Names</label>
+                                              <input type="hidden" id="id" name="id" value="0">
 										    <input type="text" class="form-control" id="names" name="names">
 										  </div>
                                             <div class="form-group">
@@ -71,6 +73,18 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                                                     <option>Missing</option>
                                                 </select>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="departments">Department</label>
+                                                <select class="form-control" name="departments" id="departments">
+                                                    <?php
+                                                    foreach ($departments as $k => $obj) {
+                                                        ?>
+                                                        <option value="<?= $obj->id; ?>"><?= $obj->names; ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
 
 										  <!-- <button type="submit" name="submit" class="btn btn-primary">Submit</button> -->
 										  <input type="submit" class="btn btn-primary btn-block mt-4" name="btnAdd" value="Add">
@@ -81,15 +95,17 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                             </div>
                 <div id="response">
                     <?php
-                    if(isset($_POST['btnAssignAsset'])){
-                        $_POST['category'] = 'insert';
+                    if(isset($_POST['btnAdd'])){
+                        if($_POST['id']=='0')
+                            $_POST['category'] = 'insert';
+                        else $_POST['category'] = 'update';
                         $postData = array_merge($_POST,$_SESSION);
                         $response = json_decode(curlPostRequest("AssetsRequest.php",$postData));
-                        echo $response->message;
+                        echo $response->message;//."===".json_encode($response->error);
                     }
                     ?>
                 </div>
-	                        <table class="table table-borderless table-data3">
+	                        <table class="table table-borderless table-data3" id="data-asset">
 	                            <thead>
 	                                <tr>
 	                                    <th>#</th>
@@ -100,7 +116,6 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                                         <th>Type</th>
                                         <th>Deparment</th>
                                         <th>Description</th>
-                                        <th>Assignment</th>
 	                                    <th colspan="2">Action</th>
 	                                </tr>
 	                            </thead>
@@ -117,9 +132,8 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                                         <td><?= $obj->type;?></td>
                                         <td><?= $obj->dep_name;?></td>
                                         <td><?= $obj->description;?></td>
-                                        <td> <button type="button" onclick='setAssignModal(<?= json_encode($obj);?>)' class="btn btn-success"><i class="fa fa-truck"></i></button></td></td>
                                         <td class="process">
-                                            <a href="#" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                                            <button type="button" onclick='setEditAsset(<?php echo json_encode($obj);?>)' class="btn btn-warning"><i class="fa fa-edit"></i></button>
                                             <button type="button" onclick="confirmDelete(<?= $obj->id;?>)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                                     </tr>
                                 <?php } ?>
@@ -139,8 +153,8 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Assign asset  <b><span id="assetTitle"></span></b> to student</h4>
+                        <h4 class="modal-title">Assign asset  <b><span id="assetTitle"></span></b> to student or teacher</h4>
+                        <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div id="stolenResponse"></div>
@@ -152,7 +166,7 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                                     <?php
                                     foreach ($students as $k=>$obj){
                                         ?>
-                                    <option value="<?= $obj->id; ?>"><?= $obj->firstname." ".$obj->lastname;?></option>
+                                    <option value="<?= $obj->email; ?>"><?= $obj->firstname." ".$obj->lastname . "[ ".$obj->email." ]";?></option>
                                     <?php
                                     }
                                     ?>
@@ -169,32 +183,21 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
             </div>
         </div>
     </div>
-
+<button id="openmodal" data-toggle="modal" data-target="#form" style="display: none"></button>
         <?php include_once "includes/footer.php";?>
 
         <script>
-            $("#btnSaveStolenBook").click(function (){
-                markAsStolenBook();
-            })
-            function setAssignModal(obj){
-                $("#asset-id").val(obj.id);
-                $("#assetTitle").val(obj.names);
-                $("#btnOpenAssetAssingModal").click();
+            function setEditAsset(obj){
+                $("#id").val(obj.id);
+                $("#names").val(obj.names);
+                $("#serial_number").val(obj.serial_number);
+                $("#description").val(obj.description);
+                $("#code").val(obj.code);
+                $("#type").val(obj.type);
+                document.getElementById("openmodal").click();
             }
-            //function for book details
-            function markAsStolenBook() {
-                jQuery.ajax({
-                    url: "api/requests/Assets.php",
-                    data: {cate: 'assign', id: $("#asset-id").val(), student: $("#student").val()},
-                    type: "POST",
-                    dataType: 'json',
-                    success: function (data) {
-                        $("#response").html(data.message);
-                    },
-                    error: function () {
-                    }
-                });
-            }
+
+
             function confirmDelete(id) {
                 var message = "Confirm class delete";
 
@@ -208,7 +211,7 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
             function deleteDepartment(id) {
                 $("#loaderIcon").show();
                 jQuery.ajax({
-                    url: "api/requests/ClassesRequest.php",
+                    url: "api/requests/AssetsRequest.php",
                     data: {category: 'delete', id: id},
                     type: "GET",
                     dataType: 'json',
@@ -219,6 +222,8 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=get&department=
                     }
                 });
             }
+            searchTable("#data-asset");
+
         </script>
 </body>
 </html>

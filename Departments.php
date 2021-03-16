@@ -67,7 +67,7 @@ $resp = json_decode(curlGetRequest("DepartmentRequest.php?category=get"));
                 }
                 ?>
                 </div>
-                            <table class="table table-borderless table-data3">
+                            <table class="table table-borderless table-data3" id="data-departments">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -85,7 +85,6 @@ $resp = json_decode(curlGetRequest("DepartmentRequest.php?category=get"));
                                         <td><?= $obj->acronym;?></td>
                                         <td><?= $obj->names;?></td>
                                         <td class="process">
-                                            <a href="#" class="btn btn-edit"><i class="fa fa-edit"></i></a>
                                             <button type="button" onclick="confirmDelete(<?= $obj->id;?>)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                                     </tr>
                                 <?php } ?>
@@ -124,6 +123,7 @@ $resp = json_decode(curlGetRequest("DepartmentRequest.php?category=get"));
             }
         });
     }
+    searchTable("#data-departments");
 </script>
 </body>
 

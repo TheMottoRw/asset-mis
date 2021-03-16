@@ -12,7 +12,7 @@ $students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
 <body class="animsition">
 <div class="page-wrapper">
     <!-- MENU SIDEBAR-->
-    <?php include_once "includes/logged_menu.php"; ?>
+    <?php include_once "includes/logged_menu_labtech.php"; ?>
     <!-- END MENU SIDEBAR-->
 
     <!-- PAGE CONTAINER-->
@@ -71,7 +71,7 @@ $students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
                                 </div>
                                 <div class="form-group">
                                     <label>Department Of Student</label>
-                                    <select name="dept_id" class="form-control select2" style="width: 100%;">
+                                    <select name="dept_id" onchange="loadClassByDepartment(this.value)" class="form-control select2" style="width: 100%;">
                                         <option selected="selected" disabled="disabled">-- Select Department--</option>
                                         <?php foreach ($departments AS $i=>$obj) { ?>
                                             <option value="<?= $obj->id; ?>"><?= $obj->names; ?></option>
@@ -80,7 +80,7 @@ $students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
                                 </div>
                                 <div class="form-group">
                                     <label>Class Of Student</label>
-                                    <select name="class_id" class="form-control select2" style="width: 100%;">
+                                    <select name="class_id" id="class_id" class="form-control select2" style="width: 100%;">
                                         <option selected="selected" disabled="disabled">-- Select Class--</option>
                                         <?php foreach ($classes as $k=>$obj) { ?>
                                             <option value="<?= $obj->id; ?>"><?= $obj->name; ?></option>
@@ -104,7 +104,7 @@ $students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
                 }
                 ?>
             </div>
-            <table class="table table-borderless table-data3">
+            <table class="table table-borderless table-data3" id="data-students">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -130,7 +130,6 @@ $students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
                         <td><?= $obj->dep_name;?></td>
                         <td><?= $obj->class_name;?></td>
                         <td>
-                            <a href="#" class="btn btn-edit"><i class="fa fa-edit"></i></a>
                             <button type="button" onclick="confirmDelete(<?= $obj->id;?>)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                     </tr>
                 <?php } ?>
@@ -169,6 +168,26 @@ $students = json_decode(curlGetRequest("StudentRequest.php?category=get"));
                 }
             });
         }
+            //function for book details
+            function loadClassByDepartment(departmentid) {
+                $("#loaderIcon").show();
+                var classes = "<option value=0 disabled=disabled>--Select class--</option>";
+                jQuery.ajax({
+                    url: "api/requests/ClassesRequest.php",
+                    data: {category: 'getbydepartment', department: departmentid},
+                    type: "GET",
+                    dataType: 'json',
+                    success: function (data) {
+                        for(var i=0;i<data.length;i++){
+                            classes+="<option value='"+data[i].id+"'>"+data[i].name+"</option>";
+                        }
+                        document.getElementById('class_id').innerHTML = classes;
+                    },
+                    error: function () {
+                    }
+                });
+        }
+        searchTable("#data-students");
     </script>
 </body>
 

@@ -13,7 +13,7 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
 <body class="animsition">
     <div class="page-wrapper">
         <!-- MENU SIDEBAR-->
-        <?php include_once "includes/logged_menu.php";?>
+        <?php include_once "includes/logged_menu_labtech.php";?>
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -25,9 +25,9 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="container">
-                        <h1>WELCOME TO EMPLOYEES</h1>
+                        <h3>Manage teachers</h3>
                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#form">
-                                +Add new Employee
+                                +Add new teacher
                               </button>  
                             </div>
 
@@ -35,7 +35,7 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header border-bottom-0">
-                                    <h5 class="modal-title" id="exampleModalLabel">Create new Employee</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Create new teacher</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">&times;</span>
                                     </button>
@@ -57,16 +57,19 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
                                           <div class="form-group">
                                             <label for="phone">Phone</label>
                                             <input type="text" class="form-control" id="phone" name="phone">
+                                              <input type="hidden" name="roles" id="roles" value="Teacher">
                                           </div>
-                                          <div class="form-group">
-                                            <label for="role">Role</label>
-                                              <select class="form-control" id="role" name="role">
-                                                  <option>Admin</option>
-                                                  <option>Standard</option>
-                                              </select>
-                                          </div>
+<!--                                          <div class="form-group">-->
+<!--                                            <label for="roles">Role</label>-->
+<!--                                              <select class="form-control" id="roles" name="roles" onchange="manageDepartment(this)">-->
+<!--                                                  <option>Admin</option>-->
+<!--                                                  <option>Stock manager</option>-->
+<!--                                                  <option>Lab technician</option>-->
+<!--                                                  <option>Teacher</option>-->
+<!--                                              </select>-->
+<!--                                          </div>-->
 
-                                            <div class="form-group">
+                                            <div class="form-group" id="department">
                                                 <label for="dept_id">Department</label>
                                                 <select class="form-control" id="dept_id" name="dept_id">
                                                     <?php
@@ -97,18 +100,17 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
                         $_POST['category'] = 'insert';
                         $postData = array_merge($_POST,$_SESSION);
                         $response = json_decode(curlPostRequest("EmployeeRequest.php",$postData));
-                        echo $response->message;
+                       echo $response->message;
                     }
                     ?>
                 </div>
-                            <table class="table table-borderless table-data3">
+                            <table class="table table-borderless table-data3" id="data-teachers">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Names</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>Role</th>
                                         <th>Department</th>
                                         <th colspan="2">Action</th>
                                     </tr>
@@ -122,10 +124,8 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
                                         <td><?= $obj->firstname." ".$obj->lastname;?></td>
                                         <td><?= $obj->email;?></td>
                                         <td><?= $obj->phone;?></td>
-                                        <td><?= $obj->role;?></td>
                                         <td><?= $obj->dep_name;?></td>
                                         <td class="process">
-                                            <a href="#" class="btn btn-edit"><i class="fa fa-edit"></i></a>
                                             <button type="button" onclick="confirmDelete(<?= $obj->id;?>)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
                                     </tr>
                                 <?php } ?>
@@ -163,6 +163,14 @@ $employees = json_decode(curlGetRequest("EmployeeRequest.php?category=get"));
                     }
                 });
             }
+            function manageDepartment(obj){
+                if(obj.value=='Stock manager'){
+                    document.getElementById("department").style.display='none';
+                }else{
+                    document.getElementById("department").style.display='';
+                }
+            }
+            searchTable("#data-teachers");
         </script>
 </body>
 

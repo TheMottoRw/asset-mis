@@ -35,6 +35,10 @@ switch ($method) {
 				echo json_encode($obj->getAllClasses());
 				// echo "Get All Users Requested";
 				break;
+            case 'getbydepartment':
+                echo json_encode($obj->getByDepartment($_GET));
+                // echo "Get All Users Requested";
+                break;
 			case 'delete':
 				$id=$_GET['id'];
 				echo json_encode($obj->deleteClass($id));

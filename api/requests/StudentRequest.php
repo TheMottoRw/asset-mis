@@ -33,7 +33,10 @@ switch ($method) {
 				echo json_encode($obj->getAllStudents());
 				// echo "Get All Users Requested";
 				break;
-			case 'delete':
+            case 'whotoborrow':
+                echo json_encode($obj->getWhoToBorrow());
+                break;
+            case 'delete':
 				$id=$_GET['id'];
 				echo json_encode($obj->deleteStudent($id));
 				// echo "Delete Requested";

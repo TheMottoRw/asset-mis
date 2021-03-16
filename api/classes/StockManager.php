@@ -2,7 +2,7 @@
 include_once "Database.php";
 include_once "Validator.php";
 
-class Employee
+class StockManager
 {
     private $conn;
 
@@ -13,10 +13,10 @@ class Employee
         $this->validate = new Validator();
     }
 
-    function insertEmployee($arr)
+    function insertStockManager($arr)
     {
 
-        $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'> Successfully teacher registered</div>", 'id' => 0];
+        $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'> Successfully stock manager registered</div>", 'id' => 0];
 
         $firstname = $arr['firstname'];
         $lastname = $arr['lastname'];
@@ -24,9 +24,6 @@ class Employee
         $email = $arr['email'];
 
         $password = base64_encode($arr['password']);
-        $dept_id = $arr['dept_id'];
-        $role = $arr['roles'];
-
         // validation
         $validationStatus = $this->validate->isEmpty(["Firstname"=>$firstname,"Lastname"=>$lastname,"Phone"=>$phone,"Email"=>$email]);
         if($validationStatus['status']){
@@ -35,59 +32,57 @@ class Employee
         if(!$this->validate->phone("rwandan",$phone)) return ['status'=>'ok','message'=>"<div class='alert alert-danger'>Invalid phone number</div>"];
         if(!$this->validate->email($email)) return ['status'=>'ok','message'=>"<div class='alert alert-danger'>Invalid email address</div>"];
         // end validation
+        $query = $this->conn->prepare("INSERT INTO stock_manager set firstname=:firstname,lastname=:lastname,email=:email,phone=:phone,password=:password");
 
-        $query = $this->conn->prepare("INSERT INTO employee set firstname=:firstname,lastname=:lastname,email=:email,phone=:phone,role=:role,password=:password,dept_id=:dept_id");
-
-        $query->execute(array("firstname" => $firstname, "lastname" => $lastname, "email" => $email, "phone" => $phone, "role" => $role, "password" => $password, "dept_id" => $dept_id));
+        $query->execute(array("firstname" => $firstname, "lastname" => $lastname, "email" => $email, "phone" => $phone, "password" => $password));
 
         if ($query->rowCount() > 0) {
             $response['id'] = $this->conn->lastInsertId();
         } else {
-            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to register teacher</div>", 'error' => $query->errorInfo()];
+            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to register stock manager</div>", 'error' => $query->errorInfo()];
         }
         return $response;
     }
 
-    function getAllEmployees()
+    function getAllStockManagers()
     {
-        $query = $this->conn->query("SELECT e.*,d.names as dep_name FROM employee e INNER JOIN department d ON e.dept_id=d.id");
+        $query = $this->conn->query("SELECT * FROM stock_manager");
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
-    function getEmployeeById($id)
+    function getStockManagerById($id)
     {
-        $query = $this->conn->prepare("SELECT * FROM employee where id=:id");
+        $query = $this->conn->prepare("SELECT * FROM stock_manager where id=:id");
         $query->execute(array("id" => $id));
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
-    function deleteEmployee($id)
+    function deleteStockManager($id)
     {
 
-        $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'>Successful deleted Employee</div>", 'id' => 0];
+        $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'>Successful deleted Stock manager</div>", 'id' => 0];
 
-        $query = $this->conn->prepare("DELETE FROM employee WHERE id=:id");
+        $query = $this->conn->prepare("DELETE FROM stock_manager WHERE id=:id");
         $query->execute(array("id" => $id));
         if ($query->rowCount() == 0) {
-            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to delete employee</div>", 'id' => $id, "error" => $query->errorInfo()];
+            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to delete stock manager</div>", 'id' => $id, "error" => $query->errorInfo()];
         }
         return $response;
     }
 
-    function updateEmployee($arr)
+    function updateStockManager($arr)
     {
 
-        $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'>Teacher succesfully updated</div>", 'id' => 0];
+        $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'>Stock manager succesful updated</div>", 'id' => 0];
 
         $firstname = $arr['firstname'];
         $lastname = $arr['lastname'];
         $phone = $arr['phone'];
         $email = $arr['email'];
-        $dept_id = $arr['dept_id'];
-        $role = $arr['role'];
         $id = $arr['id'];
+
         // validation
         $validationStatus = $this->validate->isEmpty(["Firstname"=>$firstname,"Lastname"=>$lastname,"Phone"=>$phone,"Email"=>$email]);
         if($validationStatus['status']){
@@ -97,12 +92,12 @@ class Employee
         if(!$this->validate->email($email)) return ['status'=>'ok','message'=>"<div class='alert alert-danger'>Invalid email address</div>"];
         // end validation
 
-        $query = $this->conn->prepare("UPDATE employee set firstname =:firstname,lastname=:lastname,email=:email,phone=:phone,role=:role,dept_id=:dept_id WHERE id=:id");
-        $query->execute(array("firstname" => $firstname, "lastname" => $lastname, "email" => $email, "phone" => $phone, "role" => $role, "dept_id" => $dept_id, "id" => $id));
+        $query = $this->conn->prepare("UPDATE stock_manager set firstname =:firstname,lastname=:lastname,email=:email,phone=:phone WHERE id=:id");
+        $query->execute(array("firstname" => $firstname, "lastname" => $lastname, "email" => $email, "phone" => $phone, "id" => $id));
 
         if ($query->rowCount() == 0) {
 
-            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to update student</div>", 'id' => $id, 'error' => $query->errorInfo()];
+            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to update stock manager</div>", 'id' => $id, 'error' => $query->errorInfo()];
         }
         return $response;
     }

@@ -10,28 +10,29 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <li>
-                    <a href="Departments.php">
-                        <i class="fas fa-chart-pie"></i>Departments</a>
+                    <a href="Teachers.php">
+                        <i class="fas fa-table"></i>Teachers</a>
                 </li>
                 <li>
-                    <a href="Classes.php">
-                        <i class="far fa-check-square"></i>Classes</a>
+                    <a href="Students.php">
+                        <i class="fas fa-calendar-alt"></i>Students</a>
                 </li>
                 <li>
-                    <a href="StockManager.php">
-                        <i class="fas fa-table"></i>Stock managers</a>
+                    <a href="AssetMovements.php">
+                        <i class="far fa-check-square"></i>Asset movement</a>
                 </li>
                 <li>
-                    <a href="LabTechnician.php">
-                        <i class="fas fa-table"></i>Lab technician</a>
+                    <a href="Reserved.php">
+                        <i class="far fa-clock"></i>Reservation</a>
                 </li>
                 <li>
                     <a href="logout.php">
-                        <i class="fas fa-power-off"></i>Logout</a>
+                        <i class="far fa-clock"></i>Logout</a>
                 </li>
+
             </ul>
         </nav>
     </div>
 </aside>
 <!-- END MENU SIDEBAR-->
-<?php validateSession(["Admin"]); ?>
+<?php validateSession(["LabTechnician"]); ?>

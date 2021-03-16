@@ -1,5 +1,6 @@
 <?php 
 include_once "Database.php";
+include_once "Validator.php";
 
 class Student
 {
@@ -9,6 +10,7 @@ class Student
     {
         $db = new Database();
         $this->conn = $db->getInstance();
+        $this->validate = new Validator();
     }
 
 	function insertStudent($arr){
@@ -24,6 +26,14 @@ class Student
     $dept_id = $arr['dept_id'];
     $class_id = $arr['class_id'];
 
+        // validation
+        $validationStatus = $this->validate->isEmpty(["Firstname"=>$firstname,"Lastname"=>$lastname,"Registration number"=>$reg_number,"Phone"=>$phone,"Email"=>$email]);
+        if($validationStatus['status']){
+            return $feed = ['status'=>'fail','message'=>"<div class='alert alert-danger'>".$validationStatus['message']."</div>"];
+        }
+        if(!$this->validate->phone("rwandan",$phone)) return ['status'=>'ok','message'=>"<div class='alert alert-danger'>Invalid phone number</div>"];
+        if(!$this->validate->email($email)) return ['status'=>'ok','message'=>"<div class='alert alert-danger'>Invalid email address</div>"];
+        // end validation
 
 	$query=$this->conn->prepare("INSERT INTO student set firstname =:firstname,lastname=:lastname,reg_number=:reg_number,email=:email,phone=:phone,password=:password,dept_id=:dept_id,class_id=:class_id");
 
@@ -52,6 +62,11 @@ class Student
 		}
 		return $data;
 	}
+	function getWhoToBorrow(){
+        $qy = $this->conn->prepare("SELECT *,'' as class_id FROM employee UNION SELECT * FROM student");
+        $qy->execute();
+        return $qy->fetchAll(PDO::FETCH_ASSOC);
+    }
 	function deleteStudent($id){
 
 		$response = ['status' => 'ok', 'message' => "<div class='alert alert-success'>Successfully deleted Student</div>", 'id' => $id];
@@ -71,12 +86,22 @@ class Student
     $lastname = $arr['lastname'];
     $reg_number = $arr['reg_number'];
     $email = $arr['email'];
+    $phone = $arr['phone'];
     $dept_id = $arr['dept_id'];
     $class_id = $arr['class_id'];
     $id = $arr['id'];
 
+        // validation
+        $validationStatus = $this->validate->isEmpty(["Firstname"=>$firstname,"Lastname"=>$lastname,"Registration number"=>$reg_number,"Phone"=>$phone,"Email"=>$email]);
+        if($validationStatus['status']){
+            return $feed = ['status'=>'fail','message'=>"<div class='alert alert-danger'>".$validationStatus['message']."</div>"];
+        }
+        if(!$this->validate->phone("rwandan",$phone)) return ['status'=>'fail','message'=>"<div class='alert alert-danger'>Invalid phone number</div>"];
+        if(!$this->validate->email($email)) return ['status'=>'fail','message'=>"<div class='alert alert-danger'>Invalid email address</div>"];
+        // end validation
 
-	$query=$this->conn->prepare("UPDATE student set firstname =:firstname,lastname=:lastname,reg_number=:reg_number,email=:email,dept_id=:dept_id,class_id=:class_id WHERE id=:id");
+
+        $query=$this->conn->prepare("UPDATE student set firstname =:firstname,lastname=:lastname,reg_number=:reg_number,email=:email,dept_id=:dept_id,class_id=:class_id WHERE id=:id");
 
 
 	$query->execute(array("firstname"=>$firstname,"lastname"=>$lastname,"reg_number"=>$reg_number,"email"=>$email,"dept_id"=>$dept_id,"class_id"=>$class_id,"id"=>$id));

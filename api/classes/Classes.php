@@ -1,6 +1,6 @@
 <?php
 include_once "Database.php";
-
+include_once "Validator.php";
 class Classes
 {
 
@@ -10,6 +10,7 @@ class Classes
     {
         $db = new Database();
         $this->conn = $db->getInstance();
+        $this->validate = new Validator();
     }
 
 
@@ -19,8 +20,17 @@ class Classes
         $response = ['status' => 'ok', 'message' => "<div class='alert alert-success'>Class successful added</div>", 'id' => 0];
 
         $name = $arr['name'];
-        $department = $arr['department'];
+        $department = intval($arr['departments']);
         $academic_year = $arr['academic_year'];
+
+        // validation
+        $validationStatus = $this->validate->isEmpty(["Class name"=>$name,"Department"=>$department,"Academic year"=>$academic_year]);
+        if($validationStatus['status']){
+            return $feed = ['status'=>'fail','message'=>"<div class='alert alert-danger'>".$validationStatus['message']."</div>"];
+        }
+        // end validation
+        $acyearValidationStatus = $this->validate->academicYear($academic_year);
+        if(!$acyearValidationStatus['status']) return ['status'=>'fail','message'=>"<div class='alert alert-danger'>".$acyearValidationStatus['message']."</div>"];
 
         $query = $this->conn->prepare("INSERT INTO classes set name =:name,department=:department,academic_year=:academic_year");
         $query->execute(array('name' => $name,'department' => $department, 'academic_year' => $academic_year));
@@ -28,7 +38,7 @@ class Classes
         if ($query->rowCount() > 0) {
             $response['id'] = $this->conn->lastInsertId();
         } else {
-            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to add class</div>", 'error' => $query->errorInfo()];
+            $response = ['status' => 'fail', 'message' => "<div class='alert alert-danger'>Failed to add class</div>", 'error' => [$query->errorInfo(),$arr]];
         }
         return $response;
     }
@@ -46,6 +56,14 @@ class Classes
 
         $query = $this->conn->prepare("SELECT * FROM classes where id=:id");
         $query->execute(array("id" => $id));
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    function getByDepartment($arr)
+    {
+        $query = $this->conn->prepare("SELECT * FROM classes where department=:dep");
+        $query->execute(array("dep" => $arr['department']));
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
@@ -69,6 +87,9 @@ class Classes
         $name = $arr['name'];
         $academic_year = $arr['academic_year'];
         $id = $arr['id'];
+
+        $acyearValidationStatus = $this->validate->academicYear($academic_year);
+        if(!$acyearValidationStatus['status']) return ['status'=>'fail','message'=>"<div class='alert alert-danger'>".$acyearValidationStatus['message']."</div>"];
 
         $query = $this->conn->prepare("UPDATE classes set name =:name,academic_year=:academic_year WHERE id=:id");
         $query->execute(array("name" => $name, "academic_year" => $academic_year, "id" => $id));

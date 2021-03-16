@@ -10,17 +10,19 @@
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
                 <li>
-                    <a href="Reservation.php">
-                        <i class="far fa-check-square"></i>Reservation</a>
+                    <a href="Assets.php">
+                        <i class="far fa-check-square"></i>Asset</a>
                 </li>
                 <li>
                     <a href="logout.php">
-                        <i class="fas fa-power-off"></i>Logout</a>
+                        <i class="far fa-check-square"></i>Logout</a>
                 </li>
-
             </ul>
         </nav>
     </div>
 </aside>
 <!-- END MENU SIDEBAR-->
-<?php validateSession(["Teacher","Student"]); ?>
+
+<?php
+validateSession(["StockManager"]);
+?>

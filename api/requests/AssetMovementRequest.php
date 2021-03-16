@@ -13,6 +13,9 @@ switch ($method) {
 			case 'update':
 				echo json_encode($obj->updateAssetMovement($_POST));
 				break;
+            case 'return':
+                echo json_encode($obj->returnAsset($_POST));
+                break;
 			
 			default:
 				# code...

@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('api_access.php');
-$reserved = json_decode(curlGetRequest("ReservationRequest.php?category=byuser&user_id=".$_SESSION['user_id']."&role=".$_SESSION['role']));
+$reserved = json_decode(curlGetRequest("ReservationRequest.php?category=get"));
 $assets = json_decode(curlGetRequest("AssetsRequest.php?category=available"));
 
 ?>
@@ -12,7 +12,7 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=available"));
 <body class="animsition">
 <div class="page-wrapper">
 
-    <?php include_once "includes/logged_menu_emp.php";?>
+    <?php include_once "includes/logged_menu_labtech.php";?>
 
     <!-- PAGE CONTAINER-->
     <div class="page-container">
@@ -82,7 +82,9 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=available"));
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Names</th>
+                    <th>Reserved by</th>
+                    <th>User type</th>
+                    <th>Asset</th>
                     <th>S/N</th>
                     <th>Local code</th>
                     <th>State</th>
@@ -96,13 +98,15 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=available"));
                     ?>
                     <tr>
                         <td><?= $k+1;?></td>
+                        <td><?= $obj->lend_to;?></td>
+                        <td><?= $obj->employee_id==0?"Student":"Teacher";?></td>
                         <td><?= $obj->names;?></td>
                         <td><?= $obj->serial_number;?></td>
                         <td><?= $obj->code;?></td>
                         <td><?= $obj->state;?></td>
                         <td><?= $obj->type;?></td>
                         <td class="process">
-                            <button type="button" onclick="setReserveAsset(<?= $obj->id;?>)" class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                            <button type="button" onclick="setTaken(<?= $obj->id;?>)" class="btn btn-success"><i class="fa fa-check-square"></i> Give</button></td>
                     </tr>
                 <?php } ?>
                 </tbody>
@@ -115,28 +119,26 @@ $assets = json_decode(curlGetRequest("AssetsRequest.php?category=available"));
 
     <?php include_once "includes/footer.php";?>
 
+    <script>
+        function setTaken(id) {
+            var isConfirmed = confirm("Confirm asset given to the one who reserved it");
+            if (isConfirmed) {
+                jQuery.ajax({
+                    url: "api/requests/ReservationRequest.php",
+                    data: {category: 'taken', id: id,doneby:<?= $_SESSION['user_id']; ?>},
+                    type: "POST",
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#response").html(data.message);
+                    },
+                    error: function () {
+                    }
+                });
+            }
+        }
+        searchTable("#data-reservations");
+    </script>
 </body>
 
 </html>
-<script>
-    function setReserve(asset){
-        var quantity = prompt("Please enter your name");
-        if(quantity==null || quantity==0 || isNaN(quantity)) alert("Quantity should be a number greater than 0");
-        else{
-            console.log("asset id "+asset+" quantity "+quantity );
-            // jQuery.ajax({
-            //     url: "api/requests/AssetsRequest.php",
-            //     data: {category: 'register', assetid: asset,quantity:quantity},
-            //     type: "GET",
-            //     dataType: 'json',
-            //     success: function (data) {
-            //         $("#response").html(data.message);
-            //     },
-            //     error: function () {
-            //     }
-            // });
-        }
-    }
-    searchTable("#data-reservations");
-</script>
 <!-- end document-->

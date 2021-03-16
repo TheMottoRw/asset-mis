@@ -12,7 +12,6 @@ switch ($method) {
 				break;
 			case 'update':
 			echo json_encode($obj->updateAsset($_POST));
-				echo "Update Requested";
 				break;
 			
 			default:
@@ -32,6 +31,10 @@ switch ($method) {
 				echo json_encode($obj->getAllAssets());
 				// echo "Get All Users Requested";
 				break;
+            case 'available':
+                echo json_encode($obj->getAvailableAsset());
+                // echo "Get All Users Requested";
+                break;
 			case 'delete':
 				$id=$_GET['id'];
 				echo json_encode($obj->deleteAsset($id));

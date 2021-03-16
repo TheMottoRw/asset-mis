@@ -33,12 +33,8 @@
                                     </div>
                                 </div>
                                 <div class="account-dropdown__body">
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-account"></i>Home</a>
-                                    </div>
                                 <div class="account-dropdown__footer">
-                                    <a href="#">
+                                    <a href="logout.php">
                                         <i class="zmdi zmdi-power"></i>Logout</a>
                                 </div>
                             </div>
